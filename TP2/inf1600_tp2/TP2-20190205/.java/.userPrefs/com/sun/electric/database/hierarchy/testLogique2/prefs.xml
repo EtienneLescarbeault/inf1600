@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE map SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<map MAP_XML_VERSION="1.0">
+  <entry key="CurrentCell" value="arch_2bus{sch}"/>
+  <entry key="LIB" value="testLogique2"/>
+  <entry key="SavedSignalsForCellarch_2bus" value="&#9;Signals&#9;HORLOGE&#10;&#9;Signals&#9;UPC[31:0]&#10;&#9;Signals&#9;UIR[31:0]&#10;&#9;Signals&#9;IR[31:0]&#10;&#9;Signals&#9;PC[31:0]&#10;&#9;Signals&#9;MA[31:0]&#10;&#9;Signals&#9;ACCES_MEMOIRE&#10;&#9;Signals&#9;MD[31:0]&#10;&#9;Signals&#9;A[31:0]&#10;&#9;Signals&#9;BUS_A[31:0]&#10;&#9;Signals&#9;BUS_B[31:0]&#10;&#9;Signals&#9;CONTROLE_UAL[1:0]&#10;&#9;Signals&#9;ALU_OP[31:0]&#10;&#9;Signals&#9;DEBUG_ECRIRE_&#10;&#9;Signals&#9;DEBUG_REG[2:0]&#10;&#9;Signals&#9;DEBUG_VAL[31:0]&#10;&#9;Signals&#9;DUMP_MEM&#10;&#9;Signals&#9;D_R_VAL[31:0]&#10;&#9;Signals&#9;REGISTRE_0.EAX[31:0]&#10;&#9;Signals&#9;REGISTRE_0.ECX[31:0]&#10;&#9;Signals&#9;REGISTRE_0.EDX[31:0]&#10;&#9;Signals&#9;REGISTRE_0.EBX[31:0]&#10;&#9;Signals&#9;REGISTRE_0.ESP[31:0]&#10;&#9;Signals&#9;REGISTRE_0.EBP[31:0]&#10;&#9;Signals&#9;REGISTRE_0.ESI[31:0]&#10;&#9;Signals&#9;REGISTRE_0.EDI[31:0]&#10;"/>
+</map>

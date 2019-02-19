@@ -1,0 +1,187 @@
+Electric Version 8.05
+--------------- 0 --------------
+  Wed Feb 10 09:23:47 EST 2016
+ProcessKeyBinding 401 when=1455114227573 modifiers=80 code=11 char=ffff false false
+--------------- 1 --------------
+  Wed Feb 10 09:23:47 EST 2016
+ProcessKeyBinding 401 when=1455114227884 modifiers=80 code=4f char=f false false
+--------------- 2 --------------
+  Wed Feb 10 09:23:47 EST 2016
+Menu Activated: File | Open Library...
+--------------- 3 --------------
+  Wed Feb 10 09:23:48 EST 2016
+ProcessKeyBinding 400 when=1455114227884 modifiers=80 code=0 char=f false false
+--------------- 4 --------------
+  Wed Feb 10 09:23:59 EST 2016
+Menu Activated: Tool | Simulation (Built-in) | ALS: Simulate Current Cell
+--------------- 5 --------------
+  Wed Feb 10 09:24:07 EST 2016
+Menu Activated: Tool | Simulation (Built-in) | Restore Stimuli from Disk...
+--------------- 6 --------------
+  Wed Feb 10 09:24:25 EST 2016
+ProcessKeyBinding 401 when=1455114265605 modifiers=80 code=11 char=ffff false false
+--------------- 7 --------------
+  Wed Feb 10 09:24:25 EST 2016
+ProcessKeyBinding 401 when=1455114265805 modifiers=80 code=66 char=36(6) false false
+--------------- 8 --------------
+  Wed Feb 10 09:24:25 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 9 --------------
+  Wed Feb 10 09:24:25 EST 2016
+ProcessKeyBinding 402 when=1455114265877 modifiers=80 code=66 char=36(6) false false
+--------------- 10 --------------
+  Wed Feb 10 09:24:26 EST 2016
+ProcessKeyBinding 401 when=1455114266611 modifiers=80 code=66 char=36(6) false false
+--------------- 11 --------------
+  Wed Feb 10 09:24:26 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 12 --------------
+  Wed Feb 10 09:24:26 EST 2016
+ProcessKeyBinding 402 when=1455114266708 modifiers=80 code=66 char=36(6) false false
+--------------- 13 --------------
+  Wed Feb 10 09:24:27 EST 2016
+ProcessKeyBinding 401 when=1455114267279 modifiers=80 code=64 char=34(4) false false
+--------------- 14 --------------
+  Wed Feb 10 09:24:27 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 15 --------------
+  Wed Feb 10 09:24:27 EST 2016
+ProcessKeyBinding 402 when=1455114267351 modifiers=80 code=64 char=34(4) false false
+--------------- 16 --------------
+  Wed Feb 10 09:24:27 EST 2016
+ProcessKeyBinding 401 when=1455114267714 modifiers=80 code=64 char=34(4) false false
+--------------- 17 --------------
+  Wed Feb 10 09:24:27 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 18 --------------
+  Wed Feb 10 09:24:27 EST 2016
+ProcessKeyBinding 402 when=1455114267810 modifiers=80 code=64 char=34(4) false false
+--------------- 19 --------------
+  Wed Feb 10 09:24:28 EST 2016
+ProcessKeyBinding 402 when=1455114268527 modifiers=0 code=11 char=ffff false false
+--------------- 20 --------------
+  Wed Feb 10 09:24:30 EST 2016
+ProcessKeyBinding 401 when=1455114270660 modifiers=80 code=11 char=ffff false false
+--------------- 21 --------------
+  Wed Feb 10 09:24:30 EST 2016
+ProcessKeyBinding 401 when=1455114270805 modifiers=80 code=66 char=36(6) false false
+--------------- 22 --------------
+  Wed Feb 10 09:24:30 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 23 --------------
+  Wed Feb 10 09:24:30 EST 2016
+ProcessKeyBinding 402 when=1455114270972 modifiers=80 code=66 char=36(6) false false
+--------------- 24 --------------
+  Wed Feb 10 09:24:31 EST 2016
+ProcessKeyBinding 401 when=1455114271514 modifiers=80 code=66 char=36(6) false false
+--------------- 25 --------------
+  Wed Feb 10 09:24:31 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 26 --------------
+  Wed Feb 10 09:24:31 EST 2016
+ProcessKeyBinding 402 when=1455114271667 modifiers=80 code=66 char=36(6) false false
+--------------- 27 --------------
+  Wed Feb 10 09:24:32 EST 2016
+ProcessKeyBinding 401 when=1455114272130 modifiers=80 code=64 char=34(4) false false
+--------------- 28 --------------
+  Wed Feb 10 09:24:32 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 29 --------------
+  Wed Feb 10 09:24:32 EST 2016
+ProcessKeyBinding 402 when=1455114272322 modifiers=80 code=64 char=34(4) false false
+--------------- 30 --------------
+  Wed Feb 10 09:24:32 EST 2016
+ProcessKeyBinding 401 when=1455114272578 modifiers=80 code=64 char=34(4) false false
+--------------- 31 --------------
+  Wed Feb 10 09:24:32 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 32 --------------
+  Wed Feb 10 09:24:32 EST 2016
+ProcessKeyBinding 402 when=1455114272721 modifiers=80 code=64 char=34(4) false false
+--------------- 33 --------------
+  Wed Feb 10 09:24:33 EST 2016
+ProcessKeyBinding 401 when=1455114273427 modifiers=80 code=66 char=36(6) false false
+--------------- 34 --------------
+  Wed Feb 10 09:24:33 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 35 --------------
+  Wed Feb 10 09:24:33 EST 2016
+ProcessKeyBinding 402 when=1455114273539 modifiers=80 code=66 char=36(6) false false
+--------------- 36 --------------
+  Wed Feb 10 09:24:33 EST 2016
+ProcessKeyBinding 402 when=1455114273881 modifiers=0 code=11 char=ffff false false
+--------------- 37 --------------
+  Wed Feb 10 09:24:41 EST 2016
+ProcessKeyBinding 401 when=1455114281363 modifiers=80 code=11 char=ffff false false
+--------------- 38 --------------
+  Wed Feb 10 09:24:41 EST 2016
+ProcessKeyBinding 401 when=1455114281534 modifiers=80 code=66 char=36(6) false false
+--------------- 39 --------------
+  Wed Feb 10 09:24:41 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 40 --------------
+  Wed Feb 10 09:24:41 EST 2016
+ProcessKeyBinding 402 when=1455114281679 modifiers=80 code=66 char=36(6) false false
+--------------- 41 --------------
+  Wed Feb 10 09:24:45 EST 2016
+ProcessKeyBinding 402 when=1455114285075 modifiers=0 code=11 char=ffff false false
+--------------- 42 --------------
+  Wed Feb 10 09:25:22 EST 2016
+ProcessKeyBinding 401 when=1455114322436 modifiers=80 code=11 char=ffff false false
+--------------- 43 --------------
+  Wed Feb 10 09:25:22 EST 2016
+ProcessKeyBinding 401 when=1455114322583 modifiers=80 code=64 char=34(4) false false
+--------------- 44 --------------
+  Wed Feb 10 09:25:22 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 45 --------------
+  Wed Feb 10 09:25:22 EST 2016
+ProcessKeyBinding 402 when=1455114322637 modifiers=80 code=64 char=34(4) false false
+--------------- 46 --------------
+  Wed Feb 10 09:25:23 EST 2016
+ProcessKeyBinding 401 when=1455114323062 modifiers=80 code=64 char=34(4) false false
+--------------- 47 --------------
+  Wed Feb 10 09:25:23 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 48 --------------
+  Wed Feb 10 09:25:23 EST 2016
+ProcessKeyBinding 402 when=1455114323126 modifiers=80 code=64 char=34(4) false false
+--------------- 49 --------------
+  Wed Feb 10 09:25:24 EST 2016
+ProcessKeyBinding 402 when=1455114324245 modifiers=0 code=11 char=ffff false false
+--------------- 50 --------------
+  Wed Feb 10 09:25:26 EST 2016
+ProcessKeyBinding 401 when=1455114326718 modifiers=80 code=11 char=ffff false false
+--------------- 51 --------------
+  Wed Feb 10 09:25:27 EST 2016
+ProcessKeyBinding 401 when=1455114327215 modifiers=80 code=11 char=ffff false false
+--------------- 52 --------------
+  Wed Feb 10 09:25:27 EST 2016
+ProcessKeyBinding 401 when=1455114327246 modifiers=80 code=11 char=ffff false false
+--------------- 53 --------------
+  Wed Feb 10 09:25:27 EST 2016
+ProcessKeyBinding 401 when=1455114327262 modifiers=80 code=66 char=36(6) false false
+--------------- 54 --------------
+  Wed Feb 10 09:25:27 EST 2016
+Menu Activated: Window | Pan Right
+--------------- 55 --------------
+  Wed Feb 10 09:25:27 EST 2016
+ProcessKeyBinding 402 when=1455114327350 modifiers=80 code=66 char=36(6) false false
+--------------- 56 --------------
+  Wed Feb 10 09:25:30 EST 2016
+ProcessKeyBinding 402 when=1455114330016 modifiers=0 code=11 char=ffff false false
+--------------- 57 --------------
+  Wed Feb 10 09:34:05 EST 2016
+ProcessKeyBinding 401 when=1455114845537 modifiers=80 code=11 char=ffff false false
+--------------- 58 --------------
+  Wed Feb 10 09:34:05 EST 2016
+ProcessKeyBinding 401 when=1455114845891 modifiers=80 code=64 char=34(4) false false
+--------------- 59 --------------
+  Wed Feb 10 09:34:05 EST 2016
+Menu Activated: Window | Pan Left
+--------------- 60 --------------
+  Wed Feb 10 09:34:05 EST 2016
+ProcessKeyBinding 402 when=1455114845974 modifiers=80 code=64 char=34(4) false false
+--------------- 61 --------------
+  Wed Feb 10 09:34:06 EST 2016
+ProcessKeyBinding 402 when=1455114846585 modifiers=0 code=11 char=ffff false false

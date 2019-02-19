@@ -1,0 +1,24 @@
+# INF1600 - TP2
+# Mémoire de microprogrammes
+#
+# Chaque mot de 16 bits (2 octets, little-endian, séparés par un espace) donne
+# les signaux de contrôle d'un cycle du processeur. Le fichier
+# "tp2ucode_adr.txt" liste, pour chaque instruction, l'adresse de début de
+# microprogramme dans *ce fichier*.
+# Microprogramme pour la recherche d'instruction (doit commencer
+# à l'adresse 0) :
+
+0   60 30   # lire PC, écrire MA, UAL <= 3
+2   #<À REMPLIR>
+4   #<À REMPLIR>
+
+
+# Microprogramme pour l'instruction "nop" (instruction qui ne fait rien) :
+
+10  00 80   # fin du microprogramme
+
+# Microprogramme pour les opérations arithmétiques/logiques typiques (ajoutez
+# autant d'adresses que vous en avez besoin à partir de 0x20) :
+
+20  #<À REMPLIR>
+22  #...
