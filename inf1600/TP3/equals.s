@@ -8,15 +8,15 @@ matrix_equals_asm:
 
 		movl $0, -4(%ebp)		#r=0
 		movl $0, -8(%ebp)		#c=0
-
+		mov 8(%ebp), %esi		#esi <- inmatdata1
+		mov 12(%ebp), %edi		#edi <- inmatdata2
 		
 		mov 16(%ebp), %ebx		#ebx <- matorder
 
 forR:						   #label de la boucle for avec r < matorder
 		movl $0, -8(%ebp)		#Sinon, c est réinitialisé à 0 avant la boucle for de r (avec r < matorder)
 forC:						   #label de la boucle for avec c < matorder
-		mov 8(%ebp), %esi		#esi <- inmatdata1
-		mov 12(%ebp), %edi		#edi <- inmatdata2
+		
 		
 		mov -4(%ebp), %eax	   #eax = r
 		imul %ebx, %eax		   #eax = r * matorder

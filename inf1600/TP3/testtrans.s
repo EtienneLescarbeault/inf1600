@@ -14,40 +14,44 @@ _Z16matrix_transposePKiPii:
 	movq	%rsi, -32(%rbp)
 	movl	%edx, -36(%rbp)
 	movl	$0, -4(%rbp)
-.L5:
-	movl	-4(%rbp), %eax
-	cmpl	-36(%rbp), %eax
-	jge	.L6
-	movl	$0, -8(%rbp)
-.L4:
-	movl	-8(%rbp), %eax
-	cmpl	-36(%rbp), %eax
-	jge	.L3
-	movl	-8(%rbp), %eax
-	imull	-36(%rbp), %eax
-	movl	%eax, %edx
-	movl	-4(%rbp), %eax
-	addl	%edx, %eax
+.L5:						#continue forC
+	movl	-4(%rbp), %eax	#r = eax
+	cmpl	-36(%rbp), %eax # r plus grand ou egal a matorder?
+	jge	.L6				#vers l'epilogue
+	movl	$0, -8(%rbp)	#sinon, c = 0
+.L4:						#forC
+	movl	-8(%rbp), %eax	#eax = c
+	cmpl	-36(%rbp), %eax	#c plus grand ou egal a matorder?
+	jge	.L3					#increm c, retour vers  continueforC
+
+	movl	-8(%rbp), %eax	#eax = c
+	imull	-36(%rbp), %eax	#eax = c*matorder
+	movl	%eax, %edx		#edx = eax
+	movl	-4(%rbp), %eax	#eax = r
+	addl	%edx, %eax		#eax = r + c* matorder
 	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	leaq	(%rdx,%rax), %rcx
-	movl	-4(%rbp), %eax
-	imull	-36(%rbp), %eax
-	movl	%eax, %edx
-	movl	-8(%rbp), %eax
-	addl	%edx, %eax
+	leaq	0(,%rax,4), %rdx #edx = eax * 4 = 4*(r+c*matorder)
+	movq	-24(%rbp), %rax		#eax = inmatdata
+	leaq	(%rdx,%rax), %rcx	#ecx = eax + edx
+
+	movl	-4(%rbp), %eax 		#eax = r
+	imull	-36(%rbp), %eax 	#eax = r * matorder
+	movl	%eax, %edx			#edx = r* matorder
+	movl	-8(%rbp), %eax		#eax = c
+	addl	%edx, %eax			#eax = c + r* matorder
 	cltq
 	leaq	0(,%rax,4), %rdx
 	movq	-32(%rbp), %rax
 	addq	%rax, %rdx
+
 	movl	(%rcx), %eax
 	movl	%eax, (%rdx)
+	
 	addl	$1, -8(%rbp)
 	jmp	.L4
 .L3:
-	addl	$1, -4(%rbp)
-	jmp	.L5
+	addl	$1, -4(%rbp) #r = r+1
+	jmp	.L5				 #vers continue forC
 .L6:
 	nop
 	popq	%rbp

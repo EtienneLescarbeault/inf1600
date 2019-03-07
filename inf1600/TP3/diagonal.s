@@ -1,81 +1,80 @@
 .global matrix_diagonal_asm
 
 matrix_diagonal_asm:
-        push %ebp      			/* Save old base pointer */
-        mov %esp, %ebp 			/* Set ebp to current esp */
+	push %ebp      			/* Save old base pointer */
+	mov %esp, %ebp 			/* Set ebp to current esp */
 
-		/* Write your solution here */
-        push %ebp			/* Save old base pointer */
-        mov %esp, %ebp		/* Set ebp to current esp */
+	sub $8, %esp  		#espace alloué pour r et c
+	movl $0, -4(%ebp)	#r=0
+	
+	mov 8(%ebp), %edi       #edi - inmatdata
+	mov 16(%ebp), %esi	#esi = outmatdata
+continueForC:			#label pour la continuité de la boucle for avec c (la condition d'arrêt n'a pas été remplie)
+				#On incrémente la valeur de c (++c)
+	mov -4(%ebp), %eax			#Comparaison entre c et matorde
+	cmp 16(%ebp), %eax
+	jge epilogue
+	movl $0, -8(%ebp)	
 
-		sub $8, %esp   #espace alloué pour r et c
+forC:	
+	mov -8(%ebp), %eax	   #eax = r
+	cmp 16(%ebp), %eax	           #r plus grand ou egal à matorder?
+	jge continueForR	   #on sort de la boucle forC, branchement vers la boucle R
 
-		movl $0, -4(%ebp)		#r=0
-		movl $0, -8(%ebp)		#c=0
+	mov -4(%ebp), %eax
+	mov -8(%ebp), %ebx
+	cmp %eax, %ebx
+	jne else
 
-		#mov 8(%ebp), %esi		#esi <- inmatdata1
-		#mov 12(%ebp), %edi		#edi <- inmatdata2
-		mov 16(%ebp), %ebx		#ebx <- matorder
+	mov -8(%ebp), %eax	   #eax = c
+	imul 16(%ebp), %eax	   #eax = c * matorder
+	mov %eax, %edx		   #edx = eax = c*matorder
+	mov -4(%ebp), %eax	   #eax = r
+	addl %edx, %eax    	   #eax = r + c* matorder
+	lea (, %eax,4), %edx       #ebx = eax*4 = 4*(r+c*matorder)
+	mov %edi, %eax	   #eax = inmatdata
+	lea (%edx, %eax), %ecx 	   #ecx = inmatdata + 4*(r + c* matorder)
 
-forR:						   #label de la boucle for avec r < matorder
-        movl $0, -8(%ebp)		#Sinon, c est réinitialisé à 0 avant la boucle for de r (avec r < matorder)
-forC:						   #label de la boucle for avec c < matorder
+	mov -4(%ebp), %eax	   #eax = r
+	imul 16(%ebp), %eax	   #eax = r * matorder
+	mov %eax, %edx	           #edx = eax = r * matorder
+	mov -8(%ebp), %eax	   #eax = c
+	addl %edx, %eax	   	   #eax = c + r*matorder
+	lea (, %eax,4), %edx 	   #ebx = eax *4
+	mov 12(%ebp), %eax	   #esi = outmatdata
+	add %eax, %edx
 
-	    mov 8(%ebp), %esi		#esi <- inmatdata1
-	    mov 12(%ebp), %edi		#edi <- inmatdata2
 
-        mov -4(%ebp), %eax
-        mov -8(%ebp), %edx
-        cmp %eax, %edx          #comparer r et c
-        jne else                #s'ils ne sont pas égaux, on va à la partie else
-
-        mov -8(%ebp), %eax	   #eax = c
-	    imul %edx, %eax		   #eax = c * matorder
-	    addl -4(%ebp), %eax        #eax = r + c * matorder
-	    lea (, %eax, 4), %ebx      #ebx = 4*(r + c * matorder)
-	    mov %edi, %eax             #eax = inmatdata
-	    lea (%ebx, %eax), %edi     #esi = inmatdata + 4*(r + c * matorder)
-
-	    mov -4(%ebp), %eax	   #eax = r
-	    imul %edx, %eax		   #eax = r * matorder
-	    addl -8(%ebp), %eax        #eax = c + r * matorder
-	    lea (, %eax, 4), %ebx      #edx = 4*(r + c * matorder)
-	    mov %esi, %eax             #eax = outmatdata
-	    lea (%ebx, %eax), %esi     #edi = outmatdata + 4*(c + r * matorder)
-	    mov (%edi), %eax		#eax<-m[edi]
-	    mov %eax, (%esi)	   #m[eax] <- m[edi]
-	#ces deux dernières lignes font outmatdata[c + r * matorder] = inmatdata[r + c * matorder
+	mov (%ecx), %eax	   #eax<-m[edi]
+	mov %eax, (%edx)	   #m[eax] <- m[edi]
+	
+	addl $1, -8(%ebp)
+	jmp forC		   	#ces deux dernières lignes font outmatdata[c + r * matorder] = inmatdata[r + c * matorder]
 
 else:
-        mov -4(%ebp), %eax	   #eax = r
-	    imul %edx, %eax		   #eax = r * matorder
-	    addl -8(%ebp), %eax        #eax = c + r * matorder
-	    lea (, %eax, 4), %ebx      #edx = 4*(r + c * matorder)
-	    mov %esi, %eax             #eax = outmatdata
-	    lea (%ebx, %eax), %esi     #edi = outmatdata + 4*(c + r * matorder)
-	    movl $0, (%edi)		#eax<-m[edi]
-	   
-continueForC:					#label pour la continuité de la boucle for avec c (la condition d'arrêt n'a pas été remplie)
-					#On incrémente la valeur de c (++c)
-		
-        cmp -8(%ebp), %ebx		#Comparaison entre c et matorder
-        incl -8(%ebp) 
-        ja forC					#Si matorder est plus grand que c, on refait la boucle
-		
+	mov -4(%ebp), %eax	   #eax = r
+	imul 16(%ebp), %eax	   #eax = r * matorder
+	mov %eax, %edx	           #edx = eax = r * matorder
+	mov -8(%ebp), %eax	   #eax = c
+	addl %edx, %eax	   	   #eax = c + r*matorder
+	lea (, %eax,4), %edx 	   #ebx = eax *4
+	mov 12(%ebp), %eax	   #esi = outmatdata
+	add %eax, %edx
 
-continueForR:					#label pour la continuité de la boucle for avec r (la condition d'arrêt n'a pas été remplie)
-					#On incrémente la valeur de r (++r)
-		cmp -4(%ebp), %ebx		#Comparaison entre r et matorder
-        incl -4(%ebp)
-		ja forR					#Si matorder est plus grand que r, on refait la boucle. Sinon, aucun branchement n'est à faire et on sort.
+	movl $0, (%edx)
 
+	addl $1, -8(%ebp)	#Si matorder est plus grand que c, on refait la boucle
+	jmp forC			#Sinon, c est réinitialisé à 0 avant la boucle for de r (avec r < matorder)
+
+continueForR:			#label pour la continuité de la boucle for avec r (la condition d'arrêt n'a pas été remplie)
+	addl $1, -4(%ebp)		#Si matorder est plus grand que r, on refait la boucle. Sinon, aucun branchement n'est à faire et on sort.
+    jmp continueForC
 
 epilogue:
-		mov (%ebp), %ebx		# Ré-établie ebx
-        leave          /* Restore ebp and esp */
-        ret            /* Return to the caller */
+	mov (%ebp), %ebx
+	leave          /* Restore ebp and esp */
+	ret            /* Return to the caller */	
 
 		
-        leave          			/* Restore ebp and esp */
-        ret            			/* Return to the caller */
+
 
