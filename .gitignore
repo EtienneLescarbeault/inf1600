@@ -1,0 +1,9 @@
+*.o
+*.
+tst
+tst.c
+tst.s
+tst2.c
+tst2.s
+tst3.c
+tst3.s
