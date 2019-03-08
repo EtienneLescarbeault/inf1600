@@ -10,7 +10,6 @@ matrix_equals_asm:
 		movl $0, -8(%ebp)		#c=0
 		mov 8(%ebp), %esi		#esi <- inmatdata1
 		mov 12(%ebp), %edi		#edi <- inmatdata2
-		
 		mov 16(%ebp), %ebx		#ebx <- matorder
 
 forR:						   #label de la boucle for avec r < matorder

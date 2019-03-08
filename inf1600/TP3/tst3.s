@@ -17,7 +17,7 @@ tst3:
 .L3:
 	movl	-4(%rbp), %eax	#eax = r
 	cltq
-	leaq	0(,%rax,4), %rdx	
+	leaq	0(,%rax,4), %rdx	#edx = 
 	movq	-24(%rbp), %rax
 	addq	%rdx, %rax
 	movl	-4(%rbp), %edx
