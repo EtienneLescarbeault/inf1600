@@ -1,91 +1,82 @@
 .globl matrix_multiply_asm
 
 matrix_multiply_asm:
-        push %ebp      /* save old base pointer */
-        mov %esp, %ebp /* set ebp to current esp */
+    push %ebp      				/* save old base pointer */
+    mov %esp, %ebp 				/* set ebp to current esp */
         
-        /* Write your solution here */
-        sub $16, %esp           #Place pour r, c, i, elem
-        movl $0, -4(%ebp)       #r = 0   
-        movl $0, -8(%ebp)       #c = 0
-        movl $0, -12(%ebp)      #i =0
-        movl $0, -16(%ebp)      #elem = 0
+    /* Write your solution here */
+    sub $16, %esp           	#Place pour r, c, i, elem
+    movl $0, -4(%ebp)       	#r = 0   
+    movl $0, -8(%ebp)       	#c = 0
+    movl $0, -12(%ebp)      	#i =0
+    movl $0, -16(%ebp)      	#elem = 0
 
-        #mov -16(%ebp), %edx     #edi = elem
-        #mov 8(%ebp), %edi       #edi - inmatdata1
-	#mov 12(%ebp), %esi	#esi = inmatdata2
-        #mov 16(%ebp), %ebx      #edx = outmatdata
-        #matorder est dans 20(%ebp)
+	movl 8(%ebp), %esi			#inmatdata1 est dans esi
+	movl 12(%ebp), %edi			#inmatdata2 est dans edi
+	#inmatdata1 est dans 8(%ebp)
+	#inmatdata2 est dans 12(%ebp)
+	#outmatdata est dans 16(%ebp)
+	#matorder est dans 20(%ebp)
 
+forR:							#Label pour la boucle avec r < matorder				
+    movl -4(%ebp), %eax			#eax = r
+	cmp 20(%ebp), %eax			#Comparaison entre r et matorder
+	je epilogue					#Si r est égal à matorder, branchement vers l'épilogue pour la fin du programme
+	movl $0, -8(%ebp)			#Sinon, c = 0 afin d'initialiser la boucle forC
 
-       # movl	$0, -4(%ebp)		#r = 0
-	#jmp	epilogue		
+forC:							#Label pour la boucle avec c < matorder	
+	mov -8(%ebp), %eax			#eax = c
+	cmp 20(%ebp), %eax			#Comparaison entre c et matorder
+	je continueforC				#Si matorder et c sont égaux, branchement vers continueForC
 
+	movl	$0, -16(%ebp)		#Sinon, elem = 0
+	movl	$0, -12(%ebp)		#i = 0 afin d'initialiser la boucle forI
 
-ForR:
-        movl -4(%ebp), %eax		#eax = r
-	cmp 20(%ebp), %eax		#comp entre r et matorder
-	jge epilogue	
-	movl $0, -8(%ebp)		#c = 0
-	jmp continueForC
+forI:							#Label pour la boucle avec i < matorder	
+	mov -12(%ebp), %eax			#eax = i
+	cmp 20(%ebp), %eax			#Comparaison entre matorder et i
+	je continueforI				#S'ils sont égaux, la boucle forI est terminée et on fait ce qui est dessous.
 
-ForC:
-	movl	$0, -16(%ebp)		#elem  =0
-	movl	$0, -12(%ebp)		#i = 0
-	jmp	continueForI
+	mov	-4(%ebp), %eax			#eax = r
+	imul 20(%ebp), %eax			#eax = r*matorder
+	mov	-12(%ebp), %edx			#edx = i
+	add	%edx, %eax				#eax  = i+r*matorder			
+	lea	(,%eax,4), %edx			#edx = eax*4 = 4*(i+r*matorder)
+	lea (%edx, %esi), %ebx		#ebx = inmatdata1 + 4*(i+r*matorder), revient à inmatdata1[i+r*matorder]
 
-ForI:
-	mov	-4(%ebp), %eax		#eax =r
-	imul	20(%ebp), %eax		#eax = r*matorder
-	mov	%eax, %edx			#edx = r*matorder
-	mov	-12(%ebp), %eax		#eax = i
-	add	%edx, %eax			#eax  = i+r*matorder
-							#####################
-	lea	(,%eax,4), %edx	#edx = eax*4
-	movl	8(%ebp), %eax		#eax = inmatdata1
-	addl	%edx, %eax			#eax = inmatdata1+4*(i+r*matorder)
-	mov	(%eax), %edx		#edx = inmatdata1[i+r*matorder]
+	movl -12(%ebp), %eax		#eax = i
+	imul 20(%ebp), %eax			#eax = i*matorder
+	movl -8(%ebp), %edx			#edx = c
+	add	%edx, %eax				#eax = c+i*matorder			
+	lea	(,%eax,4), %ecx			#ecx = 4*eax
+	lea (%ecx, %edi), %eax		#eax = inmatdata2 + 4*(c+i*matorder), revient à inmatdata2[c+i*matorder]
 
-	movl	-12(%ebp), %eax		#eax = i
-	imul	20(%ebp), %eax		#eax = i*matorder
-	mov	%eax, %ecx			#ecx = eax = i*matroder
-	movl	-8(%ebp), %eax		#eax = c
-	add	%ecx, %eax			#eax = c+i*matorder
-							###########################
-	lea	(,%eax,4), %ecx	#ecx = 4*eax
-	movl	12(%ebp), %eax		#eax = inmatdata2
-	add	%ecx, %eax			#eax = inmatdata2 + 4*(c+i*matorder)
-	mov	(%eax), %eax		#eax = inmatdata2[c+i*matorder]
+	mov (%ebx), %edx			#edx = Mem[inmatdata1[i+r*matorder]]
+	mov (%eax), %ebx			#ebx = Mem[inmatdata2[c+i*matorder]]
 
-	imul	%edx, %eax			#eax = inmatdata1[i+r*matorder] * inmatdata2[c+i*matorder]
-	addl	%eax, -16(%ebp)		#elem = elem + inmatdata1[i+r*matorder] * inmatdata2[c+i*matorder]
-	incl	-12(%ebp)		#increm i
-        
-continueForI:
-	movl	-12(%ebp), %eax		#eax = i
-	cmpl	20(%ebp), %eax		#comp entr i et matorder
-	jl	ForI						#si i est moins que matorder, vers l5
-	movl	-4(%ebp), %eax		#eax = r
-	imull	20(%ebp), %eax		#eax = r*matorder
-	movl	%eax, %edx			#edx = r*matorder
-	movl	-8(%ebp), %eax		#eax = c
-	addl	%edx, %eax			#eax  =c+r*matorder
-	
-	lea	(,%eax,4), %edx	#edx = eax*4= 4*(c+r*matorder)
-	mov	16(%ebp), %eax		#eax = outmatdata
-	add	%eax, %edx			#edx = outmatdata + 4*(c+r*matorder)
-	movl	-16(%ebp), %eax		#eax = elem
-	mov	%eax, (%edx)		#outmatdata[c+r*matorder] = elem
-	incl -8(%ebp)		#increm c
+	imul %edx, %ebx				#ebx = Mem[inmatdata1[i+r*matorder]] * Mem[inmatdata2[c+i*matorder]]
+	addl %ebx, -16(%ebp)		#elem = elem + ebx
 
-continueForC:
-	movl	-8(%ebp), %eax		#eax = c
-	cmp	20(%ebp), %eax		#comp entre matorder et c
-	jl	ForC						#si matorder est plus bas que c, vers L6
-	incl -4(%ebp)		#increm r
-        jmp ForR
+	incl -12(%ebp)				#i est incrémenté (++i)
+    jmp forI					#On recommence la boucle forI
 
-epilogue:
-	mov (%ebp), %ebx
-	leave          /* Restore ebp and esp */
-	ret            /* Return to the caller */
+continueforI:					#Label pour la continuit. de la boucle forI
+	movl -4(%ebp), %eax			#eax = r
+	imul 20(%ebp), %eax			#eax = r*matorder
+	movl -8(%ebp), %edx			#edx = c
+	add %edx, %eax				#eax  = c + r*matorder
+	lea	(,%eax,4), %edx			#edx = eax*4 = 4*(c+r*matorder)
+	addl 16(%ebp), %edx		    #edx = outmatdata + 4*(c+r*matorder)
+	movl -16(%ebp), %eax		#eax = elem
+	mov	%eax, (%edx)			#outmatdata[c+r*matorder] = elem
+
+	incl -8(%ebp)				#c est incrémenté (++c)
+	jmp forC					#La boucle forC est recommencée
+
+continueforC:					#Label qui s'occupe de faire recommencer la boucle forC
+	incl -4(%ebp)				#r est incrémenté (++r)
+    jmp forR					#On retourne à la boucle forR afin de faire recommencer forC.
+
+epilogue:						#Label pour fin de programme
+	leave          				/* Restore ebp and esp */
+	ret            				/* Return to the caller */
