@@ -31,14 +31,14 @@ forC:
 	imul 16(%ebp), %eax	   		#eax = c * matorder
 	mov -4(%ebp), %edx	   		#edx = r
 	addl %edx, %eax    	   		#eax = r + c* matorder
-	lea (, %eax,4), %edx        #ebx = eax*4 = 4*(r+c*matorder)
+	lea (, %eax,4), %edx        #edx = eax*4 = 4*(r+c*matorder)
 	lea (%edx, %edi), %ecx 	    #ecx = inmatdata + 4*(r + c* matorder), revient à inmatdata[r + c* matorder]
 
 	mov -4(%ebp), %eax	   		#eax = r
 	imul 16(%ebp), %eax	   		#eax = r * matorder
 	mov -8(%ebp), %edx	   		#edx = c
 	add %edx, %eax	   	   		#eax = c + r*matorder
-	lea (, %eax,4), %edx 	    #ebx = eax *4 = 4*(c + r*matorder)
+	lea (, %eax,4), %edx 	    #edx = eax *4 = 4*(c + r*matorder)
 	lea (%esi, %edx), %edx		#edx = outmatdata + 4*(c + r*matorder), revient à outmatdata[c + r*matorder]
 
 	mov (%ecx), %eax	   		#eax = Mem[inmatdata[r + c* matorder]]
@@ -55,7 +55,7 @@ else:					   		#Label pour la partie else du if.
 	lea (, %eax,4), %edx 	    #ebx = eax *4 = 4*(c + r*matorder)
 						        
 	add %esi, %edx				#edx = outmatdata + 4*(c + r*matorder)
-	movl $0, (%edx)				#outmatdata[c + r*matorder] = 0
+	movl $0, (%edx)				#Mem[outmatdata[c + r*matorder]] = 0
 
 	incl -8(%ebp)				#On incrémente c (++c)
 	jmp forC					#Retour au début vers la boucle forC

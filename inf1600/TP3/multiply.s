@@ -13,8 +13,6 @@ matrix_multiply_asm:
 
 	movl 8(%ebp), %esi			#inmatdata1 est dans esi
 	movl 12(%ebp), %edi			#inmatdata2 est dans edi
-	#inmatdata1 est dans 8(%ebp)
-	#inmatdata2 est dans 12(%ebp)
 	#outmatdata est dans 16(%ebp)
 	#matorder est dans 20(%ebp)
 
@@ -68,7 +66,7 @@ continueforI:					#Label pour la continuit. de la boucle forI
 	lea	(,%eax,4), %edx			#edx = eax*4 = 4*(c+r*matorder)
 	addl 16(%ebp), %edx		    #edx = outmatdata + 4*(c+r*matorder)
 	movl -16(%ebp), %eax		#eax = elem
-	mov	%eax, (%edx)			#outmatdata[c+r*matorder] = elem
+	mov	%eax, (%edx)			#Mem[outmatdata[c+r*matorder]] = elem
 
 	incl -8(%ebp)				#c est incrémenté (++c)
 	jmp forC					#La boucle forC est recommencée

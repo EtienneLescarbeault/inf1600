@@ -32,7 +32,6 @@ continueForC:					#label pour la continuité de la boucle for avec c (la conditi
 	ja forC						#Si matorder est plus grand que c, on refait la boucle (retour vers forC)
 	
 continueForR:					#label pour la continuité de la boucle for avec r (la condition d'arrêt n'a pas été remplie)
-		
 	cmp -4(%ebp), %ebx			#Comparaison entre r et matorder
 	incl -4(%ebp)				#On incrémente la valeur de r (++r)
 	ja forR						#Si matorder est plus grand que r, on refait la boucle. Sinon, aucun branchement n'est à faire et on sort.
