@@ -1,8 +1,8 @@
 	.file	"tst3.c"
 	.text
-	.globl	tst3
-	.type	tst3, @function
-tst3:
+	.globl	matrix_row_aver
+	.type	matrix_row_aver, @function
+matrix_row_aver:
 .LFB0:
 	.cfi_startproc
 	pushq	%rbp
@@ -10,33 +10,54 @@ tst3:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	movq	%rdi, -24(%rbp)	#e
+	movq	%rdi, -24(%rbp)
 	movq	%rsi, -32(%rbp)
-	movl	$0, -4(%rbp)	#r = 0
-	jmp	.L2
-.L3:
-	movl	-4(%rbp), %eax	#eax = r
+	movl	%edx, -36(%rbp)
+	movl	$0, -4(%rbp)
+	jmp	epilogue
+.L5:
+	movl	$0, -12(%rbp)
+	movl	$0, -8(%rbp)
+	jmp	.L3
+.L4:
+	movl	-4(%rbp), %eax
+	imull	-36(%rbp), %eax
+	movl	%eax, %edx
+	movl	-8(%rbp), %eax
+	addl	%edx, %eax
 	cltq
-	leaq	0(,%rax,4), %rdx	#edx = 
+	leaq	0(,%rax,4), %rdx
 	movq	-24(%rbp), %rax
 	addq	%rdx, %rax
-	movl	-4(%rbp), %edx
-	movslq	%edx, %rdx
-	leaq	0(,%rdx,4), %rcx
-	movq	-32(%rbp), %rdx
-	addq	%rcx, %rdx
 	movl	(%rax), %eax
-	movl	%eax, (%rdx)
+	addl	%eax, -12(%rbp)
+	addl	$1, -8(%rbp)
+.L3:
+	movl	-8(%rbp), %eax
+	cmpl	-36(%rbp), %eax
+	jl	.L4
+	movl	-4(%rbp), %eax
+	cltq
+	leaq	0(,%rax,4), %rdx
+	movq	-32(%rbp), %rax
+	leaq	(%rdx,%rax), %rcx
+	
+	movl	-12(%rbp), %eax
+	cltd
+	idivl	-36(%rbp)
+	movl	%eax, (%rcx)
 	addl	$1, -4(%rbp)
-.L2:
-	cmpl	$3, -4(%rbp)
-	jle	.L3
+
+epilogue:
+	movl	-4(%rbp), %eax
+	cmpl	-36(%rbp), %eax
+	jl	.L5
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE0:
-	.size	tst3, .-tst3
+	.size	matrix_row_aver, .-matrix_row_aver
 	.ident	"GCC: (GNU) 8.2.1 20181105 (Red Hat 8.2.1-5)"
 	.section	.note.GNU-stack,"",@progbits

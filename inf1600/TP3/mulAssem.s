@@ -18,23 +18,17 @@ matrix_multiply_asm:
         #matorder est dans 20(%ebp)
 
 
-       # movl	$0, -4(%ebp)		#r = 0
-	#jmp	epilogue		
-
-
-ForR:
-        movl -4(%ebp), %eax		#eax = r
-	cmp 20(%ebp), %eax		#comp entre r et matorder
-	jge epilogue	
-	movl $0, -8(%ebp)		#c = 0
-	jmp continueForC
-
-ForC:
+        movl	$0, -4(%ebp)		#r = 0
+	jmp	epilogue		
+					
+.L7:
+	movl	$0, -8(%ebp)		#c = 0
+	jmp	.L3
+.L6:
 	movl	$0, -16(%ebp)		#elem  =0
 	movl	$0, -12(%ebp)		#i = 0
-	jmp	continueForI
-
-ForI:
+	jmp	.L4
+.L5:
 	mov	-4(%ebp), %eax		#eax =r
 	imul	20(%ebp), %eax		#eax = r*matorder
 	mov	%eax, %edx			#edx = r*matorder
@@ -59,12 +53,11 @@ ForI:
 
 	imul	%edx, %eax			#eax = inmatdata1[i+r*matorder] * inmatdata2[c+i*matorder]
 	addl	%eax, -16(%ebp)		#elem = elem + inmatdata1[i+r*matorder] * inmatdata2[c+i*matorder]
-	incl	-12(%ebp)		#increm i
-        
-continueForI:
+	addl	$1, -12(%ebp)		#increm i
+.L4:
 	movl	-12(%ebp), %eax		#eax = i
 	cmpl	20(%ebp), %eax		#comp entr i et matorder
-	jl	ForI						#si i est moins que matorder, vers l5
+	jl	.L5						#si i est moins que matorder, vers l5
 	movl	-4(%ebp), %eax		#eax = r
 	imull	20(%ebp), %eax		#eax = r*matorder
 	movl	%eax, %edx			#edx = r*matorder
@@ -76,16 +69,17 @@ continueForI:
 	add	%eax, %edx			#edx = outmatdata + 4*(c+r*matorder)
 	movl	-16(%ebp), %eax		#eax = elem
 	mov	%eax, (%edx)		#outmatdata[c+r*matorder] = elem
-	incl -8(%ebp)		#increm c
-
-continueForC:
+	addl	$1, -8(%ebp)		#increm c
+.L3:
 	movl	-8(%ebp), %eax		#eax = c
 	cmp	20(%ebp), %eax		#comp entre matorder et c
-	jl	ForC						#si matorder est plus bas que c, vers L6
-	incl -4(%ebp)		#increm r
-        jmp ForR
+	jl	.L6						#si matorder est plus bas que c, vers L6
+	addl	$1, -4(%ebp)		#increm r
 
 epilogue:
+        movl -4(%ebp), %eax		#eax = r
+	cmp	20(%ebp), %eax		#comp entre r et matorder
+	jl	.L7	
 	mov (%ebp), %ebx
 	leave          /* Restore ebp and esp */
 	ret            /* Return to the caller */
