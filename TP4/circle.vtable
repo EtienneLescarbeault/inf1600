@@ -1,0 +1,7 @@
+Vtable for CCircle
+CCircle::_ZTV7CCircle: 9u entries
+8     CCircle::PerimeterCpp
+12    CCircle::PerimeterAsm
+16    CCircle::AreaCpp
+20    CCircle::AreaAsm
+24    CCircle::Name

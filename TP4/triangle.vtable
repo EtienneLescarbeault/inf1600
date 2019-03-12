@@ -1,0 +1,7 @@
+Vtable for CTriangle
+CTriangle::_ZTV9CTriangle: 9u entries
+8     CTriangle::PerimeterCpp
+12    CTriangle::PerimeterAsm
+16    CTriangle::AreaCpp
+20    CTriangle::AreaAsm
+24    CTriangle::Name
