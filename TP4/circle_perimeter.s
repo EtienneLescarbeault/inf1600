@@ -9,15 +9,15 @@ _ZNK7CCircle12PerimeterAsmEv:
         mov %esp, %ebp /* set ebp to current esp */
 
         /* Write your solution here */
-	movl	8(%ebp), %eax   #Le rayon va dans %eax
-	flds	4(%eax)         
+	movl 8(%ebp), %edx   #Le rayon va dans %eax
+	flds 4(%edx)         
 	fldpi
 	fmulp	
-        movl $factor, %eax
-        pushl %eax
-        fld (%eax)
+        movl $factor, %edx
+        pushl %edx
+        fld (%edx)
         fmulp
-	pop %eax
+	pop %edx
 	
 	
 
