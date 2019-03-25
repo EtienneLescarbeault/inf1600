@@ -1,5 +1,5 @@
 .data
-        factor: .float 2.0 /* use this to multiply by two */
+        factor: .float 2.0      #facteur de type float
 
 .text
 .globl	_ZNK9CTriangle9HeightAsmEv
@@ -16,9 +16,9 @@ _ZNK9CTriangle9HeightAsmEv:
         addl $16, %eax          #appel de la fonction assembleur de l'aire, à la position +16 de la vtable (triangle.vtable)
         call *(%eax)            #Calcul de l'aire du triangle avec la méthode virtuelle, mise dans st[0]
 
-        fstp -8(%ebp)           #L'aire du triangle ainsi calculée de retrouve dans une variable locale, A (float)
+        fstp -8(%ebp)           #L'aire du triangle ainsi calculée de retrouve dans une variable locale, A (float) à cette position
       
-        movl -8(%ebp), %eax     #a variable locale A est mise dans %eax
+        movl -8(%ebp), %eax     #La variable locale A est mise dans %eax
         movl $factor, %edx      #edx reçoit la valeur du facteur (2) de type float
         push %edx               #Ce facteur est mis sur le dessus de la pile
         fld (%edx)              #Mem[edx] dans st[0]
@@ -29,9 +29,10 @@ _ZNK9CTriangle9HeightAsmEv:
         fld 12(%eax)            #msides[2] dans st[1]
         fdivrp                  #On divise st[0] par st[1]. Le résultat de la hauteur est mis dans st[0]
 
-        pop %edx
-        pop %eax
         
-epilogue:        
-        leave          /* restore ebp and esp */
-        ret            /* return to the caller */
+epilogue:      
+        pop %edx                #Rétablir %edx
+        pop %eax                #Rétablir %eax
+        addl $8, %esp           #Dépilerer les paramètres
+        leave                   /* restore ebp and esp */
+        ret                     /* return to the caller */
