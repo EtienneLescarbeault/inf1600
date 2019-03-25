@@ -5,9 +5,9 @@ _ZNK9CTriangle12PerimeterAsmEv:
         mov %esp, %ebp /* set ebp to current esp */
         
         /* Write your solution here */
-        movl 8(%ebp), %edx      #Le tableau de côtés "msides" va dans %edx
-        fld 4(%edx)             #Le premier élément, msides[0], va sà st[0]
-        fld 8(%edx)             #Le deuxième élément, msides[1] va à st[1]
+        movl 8(%ebp), %edx      #L'adresse de l'objet Triangle va dans %edx
+        fld 4(%edx)             #Le premier élément de l'attribut  msides[3], msides[0], va à st[0]
+        fld 8(%edx)             #Le deuxième élément du tableau, msides[1] va à st[1]
         faddp                   #On les additionne, le résultat (msides[0] + misides[1] est rangé dans st[0]
         fld 12(%edx)            #Le troisième élément, msides[2], va dans st[1]
         faddp                   #On les additionne, le résultat (msides[0]+msides[1]+msides[2]) va dans st[0]

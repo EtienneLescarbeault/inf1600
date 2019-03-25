@@ -9,8 +9,8 @@ _ZNK7CCircle12PerimeterAsmEv:
         mov %esp, %ebp /* set ebp to current esp */
 
         /* Write your solution here */
-	movl 8(%ebp), %edx      #Le rayon va dans %edx
-	fld 4(%edx)             #Cette variable est mise à st[0] de FPU
+	movl 8(%ebp), %edx      #L'adresse de l'objet va dans %edx
+	fld 4(%edx)             #Le premier attribut, le rayon, est mis à st[0] de FPU
 	fldpi                   #La valeur de PI est ensuite empilée et occuppe st[1]
 	fmulp	                #Le rayon et PI sont multipliés. Le résultat va dans st[0].
         movl $factor, %edx      #Le facteur (2.0) va dans %edx

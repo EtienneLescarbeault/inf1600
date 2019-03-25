@@ -1,7 +1,7 @@
 .data                           #Ici, une section .data a été ajoutée afin de définir la valeur de 2 sous forme de float (2.0) comme dans circle_perimeter.s
 
         diviseur: .float 2.0
-        
+
 .text
 .globl _ZNK9CTriangle7AreaAsmEv
 
@@ -11,7 +11,7 @@ _ZNK9CTriangle7AreaAsmEv:
         
         /* Write your solution here */
         subl $8, %esp           #Espace pour p, une variable locale
-        movl 8(%ebp), %eax      #On met  un pointeur sur l'objet courant dans %eax
+        movl 8(%ebp), %eax      #On met  un pointeur sur l'objet courant (adresse de l'objet de type triangle) dans %eax
         push %eax               #this est mis sur la pile
         movl (%eax), %eax       #vtable est maintenant pointée
         addl $12, %eax          #appel de la fonction assembleur du périmètre, 2e dans la vtable à +12
@@ -19,7 +19,7 @@ _ZNK9CTriangle7AreaAsmEv:
         
         movl $diviseur, %edx    #edx reçoit la valeur du diviseur
         push %edx               #Ce diviseur est mis sur le dessus de la pile
-        fld (%edx)              #(%edx) dans st[0]
+        fld (%edx)              #Mem[edx] dans st[0]
         fdivrp                  #Le périmètre est divisé par 2
 
         fstp -8(%ebp)           #Le résultat va dans p, une variable locale de type float
